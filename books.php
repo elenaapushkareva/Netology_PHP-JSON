@@ -5,12 +5,14 @@ if ($argv[1] == NULL) {
 }
 
 //Получаем данные с внешнего ресурса
-$filecontent = file_get_contents('https://www.googleapis.com/books/v1/volumes?q='. urlencode($argv[1]));
+$filecontent = file_get_contents('https://www.googleapis.com/books/v1/volumes?q='.urlencode($argv[1]));
+$books = json_decode($filecontent, true);
+
 
 $report = array();
 
 //Считаем, сколько всего книг
-$f = count($books['items'][0]);
+$f = count($books['items']['0']);
 
 
 // Создаем массив с нужными значениями id, title, authors
