@@ -1,5 +1,9 @@
 <?php
-if ($argv[1] == NULL) {
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+if (empty($argv[1])) {
  echo "Ошибка! Укажите название страны для получения информации";
  exit;
 }
@@ -19,9 +23,9 @@ $f = count($books['items']['0']);
 $row = 0;
 while ($row <= $f) {
     $report[$row] = [
-        'id' => $books['items'][$row]['id'],
-        'title' => $books['items'][$row]['volumeInfo']['title'],
-        'authors' => implode(',',$books['items'][$row]['volumeInfo']['authors'])
+        'id' => !empty($books['items'][$row]['id']) ? $books['items'][$row]['id'] : '',
+        'title' => !empty($books['items'][$row]['volumeInfo']['title']) ? $books['items'][$row]['volumeInfo']['title'] : '',
+        'authors' => !empty($books['items'][$row]['volumeInfo']['authors']) ? implode(',',$books['items'][$row]['volumeInfo']['authors']) : ''
     ];
     $row++;
 }
