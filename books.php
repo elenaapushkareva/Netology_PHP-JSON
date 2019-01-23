@@ -44,4 +44,6 @@ foreach ($report as $line) {
 $fp = file(__DIR__ . DIRECTORY_SEPARATOR . 'books.csv');
 print_r($fp);
 
+if (!empty($resource)) fclose($resource);
+
 ?>

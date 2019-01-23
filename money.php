@@ -4,7 +4,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
 if (empty($argv[1])) {
-    echo 'Ошибка! Укажите флаг --today или запустите скрипт с аргументами {цена} и {описание покупки}';
     exit('Ошибка! Укажите флаг --today или запустите скрипт с аргументами {цена} и {описание покупки}');
 }
 
@@ -17,12 +16,12 @@ if (!$resource) {
     exit;
 }
 
-echo 'Добавлена строка:'. $a .' '. $argv['1'] . ' ' . $argv['2'];
+
 // Если НЕ введен флаг --today
 if ($argv[1] != '--today') {
     $b = array($a, implode(';',array_slice($argv, 1, 1)), implode(';',array_slice($argv, 2)));
     $fp = fputcsv($resource, $b, ';');
-    $fp = file(__DIR__ . DIRECTORY_SEPARATOR . 'money.csv');
+    echo 'Добавлена строка:'. $a .' '. $argv['1'] . ' ' . $argv['2'];
 }else{ //Если введен флаг --today суммируем расходы за день
     $c = array();
     $row = 0;
@@ -36,4 +35,6 @@ if ($argv[1] != '--today') {
     }
     echo 'Сегодня ' . $a . ' Вы потратили ' . $total . ' рублей';
 }
+
+if (!empty($resource)) fclose($resource);
 ?>

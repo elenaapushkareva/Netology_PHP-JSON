@@ -23,4 +23,6 @@ while ($data = fgetcsv($resource, 0, ',')){
 }
 
 if (!$found) echo  "Страна {$argv[1]} не найдена".PHP_EOL;
+
+if (!empty($resource)) fclose($resource);
 ?>
